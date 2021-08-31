@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "jsx": "react",
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "lib": [
+        "dom",
+        "esnext"
+      ]
+    },
+    "include": [
+      //컴파일 대상 폴더
+      "client",
+      "server"
+    ],
+    "exclude": [
+      //컴파일 대상 제외
+      "node_modules",
+    ]
+}
