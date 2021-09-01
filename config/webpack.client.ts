@@ -1,12 +1,13 @@
 import path from 'path';
 import htmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 export default {
   mode: 'development',
   entry: path.resolve(__dirname, '../client/index.tsx'),
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, '../public/'),
+    filename: 'client.bundle.js',
+    path: path.resolve(__dirname, '../build/client'),
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -25,7 +26,9 @@ export default {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new htmlWebpackPlugin({
+      filename: 'page.html',
       template: path.resolve(__dirname, '../public', 'index.html'),
     }),
   ],

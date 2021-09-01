@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": " npm run client && npm run server",
     "client": "webpack --config config/webpack.client.ts",
     "server": "webpack --config config/webpack.server.ts",
-    "start": "ts-node server/app"
+    "start": "npm run client && ts-node server/index.tsx"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/react-dom": "^17.0.9",
     "@types/react-redux": "^7.1.18",
     "express": "^4.17.1",
     "react": "^17.0.2",
@@ -23,7 +25,11 @@
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
+    "@types/react-router-dom": "^5.1.8",
+    "@types/webpack-dev-server": "^4.0.3",
     "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "concurrently": "^6.2.1",
     "eslint": "^7.32.0",
     "html-webpack-plugin": "^5.3.2",
     "nodemon": "^2.0.12",

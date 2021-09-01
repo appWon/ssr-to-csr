@@ -1,14 +1,15 @@
 import path from 'path';
+import webpackNodeExternals from 'webpack-node-externals';
 
 export default {
   target: 'node',
   mode: 'development',
-  entry: path.resolve(__dirname, '../server/app.tsx'),
+  entry: path.resolve(__dirname, '../server/index.tsx'),
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: 'server.bundle.js',
     path: path.resolve(__dirname, '../build'),
   },
   module: {
@@ -20,4 +21,5 @@ export default {
       },
     ],
   },
+  externals: [webpackNodeExternals()],
 };
