@@ -3,14 +3,14 @@
 ```
 SSR-CSR
 ├── client
-		└──  .... 세팅파일
+│	└──  .... 세팅파일
 ├── config
-		├── webpack.client.ts
-		└── webpack.server.ts
+├── webpack.client.ts
+│	└── webpack.server.ts
 ├── public
-		└──  index.html
+│	└──  index.html
 ├── server
-		└──  .... 세팅파일
+│	└──  .... 세팅파일
 ├── .eslintrc.js
 ├── .prettier.js
 ├── Dockerfile - 작성중
