@@ -8,8 +8,12 @@ const CONFIG = {
   // html: 데이터 입력 위치
   bundleFolder: path.resolve(__dirname, 'client'),
   // bundleFile: express 정작 파일 등록
-  pageContentPoint: /\{\{__react-app__\}\}/,
+  pageContentPoint: '<!-- react-Data -->',
   // pageContentPoint: html.index 파일에 내용 입력 부분
+  addStyledCss: `<!-- <style id='styledComponent'></style> -->`,
+  // addStyledCss: styledComponent css 데이터 입력 부분
+  addMaterialUi: `<!-- <style id='material-ui'></style> -->`,
+  // addMaterialUi: Material-UI css 데이터 입력 부분
 };
 
 export default CONFIG;

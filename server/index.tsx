@@ -8,6 +8,8 @@ import { store } from '../client/store';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
+import { ServerStyleSheet as styledStyleSheet } from 'styled-components';
+import { ServerStyleSheets as materialStyleSheet } from '@material-ui/core/styles';
 
 // Setting Util
 import path from 'path';
@@ -23,23 +25,34 @@ app.use(express.static(CONFIG.bundleFolder));
 
 // SSR
 app.use(async (req, res, next) => {
-  const view = renderToString(
-    <StaticRouter location={req.url}>
-      <Route />
-    </StaticRouter>
+  const materialSheet = new materialStyleSheet();
+  const styledComponentSheet = new styledStyleSheet();
+
+  const bodyData = renderToString(
+    styledComponentSheet.collectStyles(
+      materialSheet.collect(
+        <StaticRouter location={req.url}>
+          <Route />
+        </StaticRouter>
+      )
+    )
   );
 
   const FileRead = promisify(readFile);
-
-  // HTML => String
-  const htmlToString = await FileRead(CONFIG.bundleHTML).then(res =>
+  const htmlStringData = await FileRead(CONFIG.bundleHTML).then(res =>
     res.toString()
   );
 
-  // HTML <id='root'> 내용 추가
-  const html = htmlToString.replace(CONFIG.pageContentPoint, view);
+  // 추가 : HTML body 데이터, styledComponet CSS, material-ui CSS
+  const materialCss = materialSheet.toString();
+  const styledComponentCss = styledComponentSheet.getStyleTags();
+  const html = htmlStringData
+    .replace(CONFIG.pageContentPoint, bodyData)
+    .replace(CONFIG.addStyledCss, styledComponentCss)
+    .replace(CONFIG.addMaterialUi, `<style>${materialCss}</style>`);
 
   res.send(html);
+  // styledComponentSheet.seal();
 });
 
 //서버 실행
