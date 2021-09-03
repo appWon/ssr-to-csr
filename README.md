@@ -104,17 +104,17 @@ Server 에서 두가지 함수를 import 해준다. 이름이 비슷하니 알�
 
 ```javascript
 const bodyData = renderToString(
-	styledComponentSheet.collectStyles(
-		materialSheet.collect(
-			<StaticRouter location={req.url}>
-				<Route />
-			</StaticRouter>
-		)
-	)
+ styledComponentSheet.collectStyles(
+  materialSheet.collect(
+   <StaticRouter location={req.url}>
+    <Route />
+   </StaticRouter>
+  )
+ )
 );
 ```
 
-이렇게 renderToString 함수 전에 사용을 해서 css 데이터를 가져 오고 난 후 아래와 같이 `string` 데이터로 만들어 준 후 html에 배치하고 내보내주면된다.
+이렇게 renderToString 함수 전에 사용을 해서 css 데이터를 가져오고 난 후 아래와 같이 `string` 데이터로 만들어 준 후 html에 배치하고 내보내주면된다.
 
 ```javascript
 const materialCss = materialSheet.toString();
