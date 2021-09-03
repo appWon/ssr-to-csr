@@ -87,11 +87,44 @@ SSR 에서 가장 중요한 요소일거다.
 
 즉, 서버에서 정적인 데이터를 이벤트에 의해서 동적인 데이터 형태로 변환 하는 프로세서라고 해석할 수 있을거 같다.
 
+
+
+# SSR-CSS 적용
+
+SSR을 적용하였다면 스타일을 적용을 하여야한다. 스타일 css도 `string 타입` 으로 html으로 전해지기 때문에 html문서에 string 데이터를  붙여 주여기만 하면 된다. 그리고 이번 프로젝트에서 사용한 styled-component, material-ui 의 css 를 SSR으로 만들어 보겠다.
+
+```javascript
+import { ServerStyleSheet as styledStyleSheet } from 'styled-components';
+import { ServerStyleSheets as materialStyleSheet } from '@material-ui/core/styles';
+```
+
+Server 에서 두가지 함수를 import 해준다. 이름이 비슷하니 알아볼수 있도록 변경해주도록 하자.
+
+위의 함수는 컴포넌트에서 스타일을 뽑아오는 함수 이다. 그렇기 때문에  컴포넌트를 `renderToString`  사용하여 string 데이터로 만들기 전에 사용을 하여야한다.
+
+```javascript
+const bodyData = renderToString(
+	styledComponentSheet.collectStyles(
+		materialSheet.collect(
+			<StaticRouter location={req.url}>
+				<Route />
+			</StaticRouter>
+		)
+	)
+);
+```
+
+이렇게 renderToString 함수 전에 사용을 해서 css 데이터를 가져 오고 난 후 아래와 같이 `string` 데이터로 만들어 준 후 html에 배치하고 내보내주면된다.
+
+```javascript
+const materialCss = materialSheet.toString();
+const styledComponentCss = styledComponentSheet.getStyleTags();
+```
+
+
+
 ## 개발예정
 
 >- Docker
 >- nginx
 >- Redux
-
-
-
