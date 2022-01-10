@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
+
 const App = () => (
   <Switch>
     <Route exact path="/" component={() => <Home />} />
