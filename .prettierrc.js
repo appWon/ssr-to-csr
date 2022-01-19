@@ -15,6 +15,6 @@ module.exports = {
   //{foo: bar}  =>  { foo: bar }
   trailingComma: "es5",
   //배열,객체 후행 쉼표 사용
-  printWidth: 80,
+  printWidth: 80, 변경완료
   //한 줄 길이
 };
